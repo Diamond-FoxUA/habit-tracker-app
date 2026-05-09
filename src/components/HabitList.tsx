@@ -1,17 +1,13 @@
 import Button from "./Button";
-import {
-  startOfWeek,
-  endOfWeek,
-  eachDayOfInterval,
-  format,
-  isSameDay,
-  isFuture,
-  subDays,
-} from "date-fns";
+import { format, isSameDay, isFuture, subDays } from "date-fns";
 import { type Habit } from "../context/HabitProvider";
 import { useHabits } from "../context/useHabits";
 
-export default function HabitList() {
+type HabitListProps = {
+  visibleDates: Date[];
+};
+
+export default function HabitList({ visibleDates }: HabitListProps) {
   const { habits } = useHabits();
 
   if (habits.length === 0) {
@@ -25,7 +21,7 @@ export default function HabitList() {
   return (
     <ul className="flex flex-col gap-3">
       {habits.map((habit) => (
-        <HabitItem habit={habit} />
+        <HabitItem visibleDates={visibleDates} habit={habit} />
       ))}
     </ul>
   );
@@ -33,15 +29,12 @@ export default function HabitList() {
 
 type HabitItemProps = {
   habit: Habit;
+  visibleDates: Date[];
 };
 
-function HabitItem({ habit }: HabitItemProps) {
+function HabitItem({ habit, visibleDates }: HabitItemProps) {
   const { deleteHabit, toggleHabit } = useHabits();
 
-  const visibleDates = eachDayOfInterval({
-    start: startOfWeek(new Date(), { weekStartsOn: 1 }),
-    end: endOfWeek(new Date(), { weekStartsOn: 1 }),
-  });
   const streak = getStreak(habit.completions);
 
   return (
