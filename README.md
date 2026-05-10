@@ -45,6 +45,6 @@ Inspired by Web Dev Simplified's [Learn React With This One Project](https://www
 
 ---
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License.
