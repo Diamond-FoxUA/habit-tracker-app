@@ -22,6 +22,7 @@ A functional, reactive habit tracking application built to help users manage dai
 
 ## ⚙️ Getting Started
 **Prerequisites**
+
 Make sure you have Node.js and npm installed on your machine.
 
 **Installation**
